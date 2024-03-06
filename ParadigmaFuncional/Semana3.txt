@@ -1,1 +1,60 @@
 Semana3:
+;Ejercicio_1
+
+(define (calcular-monto Cap I N) ; Cap(Capital), I(Intereses), N(Años)
+  (define (auxiliar cap interes años) ; Funció auxiliar(Cálculo recursivo)
+    (if (= años 0)
+        cap
+        (auxiliar (+ cap (* cap interes)) interes (- años 1)))) ; Actualización del capital sumando intereses y reduciendo los años
+  (auxiliar Cap I N)) ; Monto acumulado
+
+
+;Para imprimir los resultados ingrese lo siguiente:
+;(displayln (calcular-monto 2000 0.10 0))
+;(displayln (calcular-monto 2000 0.10 1))
+;(displayln (calcular-monto 2000 0.10 2))
+;(displayln (calcular-monto 2000 0.10 3))
+
+
+;Ejercicio_2
+
+(define(merge lista1 lista2) ;Se define la función merge que tiene como parámetro dos listas
+  (cond                      ;Condicional que permite plantear
+    ((null? lista1)lista2)   ;Si la lista1 es vacía devuelve lista2
+    ((null? lista2)lista1)   ;Si la lista2 es vacía devuelve lista1, Si no se cumple lo anterior
+    ((< (car lista1) (car lista2)) ;compara el primer elemento de cada, y el menor es colocado en el principio de la nueva lista 
+     (cons (car lista1) (merge (cdr lista1) lista2)));después se hace una llamada recursiva con la función "merge" que devolverá   
+     (cons (car lista2) (merge lista1 (cdr lista2)))));el resto de las listas lo que se guardará en la fun cons que crea una  nueva lista 
+; Para imprimir los resultados ingrese lo siguiente:
+;(merge '(1 2 3 4) '(5 6 7 8))
+;(merge '(1 2 3) '(1 2 3 4))
+
+
+;Ejercicio_3
+
+(define (sub-conjunto? Argumento1 Argumento2) ;Define la funcion subconjunto que lleva dos argumentos como parámetros
+  (cond ((null? Argumento1) #t)  ; Si el subconjunto es vacío, siempre es subconjunto
+        ((member (car Argumento1) Argumento2)  ; Verifica si el primer elemento del subconjunto está en el conjunto
+         (sub-conjunto? (cdr Argumento1) Argumento2))  ; Si está, verifica el resto del subconjunto
+        (else #f)))  ; Si no está, no es subconjunto
+
+;Para imprimir los resultados ingrese lo siguiente:
+;(display (sub-conjunto? '() '(a b c d e f))) 
+;(display (sub-conjunto? '(a b c) '(a b c d e f)))
+;(display (sub-conjunto? '(a b x) '(a b c d e f)))
+
+
+;Ejercicio_4
+
+(define (eliminar_elemento elemento lista)
+  (car (map (lambda (x) (eliminar elemento (cdr lista))) (eliminar elemento lista))))
+
+(define (eliminar elemento l)
+  (cond
+    ((null? l) '())
+    ((equal? elemento (car l)) (eliminar elemento (cdr l)))
+    (else (cons (car l) (eliminar elemento (cdr l))))))
+
+;Para imprimir los resultados ingrese lo siguiente
+;(display (eliminar_elemento 3 '(1 2 3 4 5)))
+;(display (eliminar_elemento 0 '(1 2 3 4 5)))
