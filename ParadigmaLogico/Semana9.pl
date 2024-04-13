@@ -3,11 +3,9 @@
 sub_conjunto([], _).
 sub_conjunto([X|Xs], Ys) :- member(X, Ys), sub_conjunto(Xs, Ys).
 
-% Pruebas del ejercicio
+/*Pruebas de ejercicio:*/
 ejemplo_true :-
     sub_conjunto([1,2,3], [1,2,3,4,5]).
-
-
 ejemplo_false :-
     sub_conjunto([1,2,6], [1,2,3,4,5]).
 
@@ -21,14 +19,11 @@ append(ListaAplanada, RestoAplanado, Aplanado).
 
 aplanar([Elemento|Resto], [Elemento|RestoAplanado]):- aplanar(Resto, RestoAplanado).
 
-/*Prueba de ejercicio:*/
+/*Pruebas de ejercicio:*/
 ejemplo_aplanar:- X=([1,2,[3,[4,5],[6,7]]],X).
-
 ejemplo_aplanar:- X=([2,1,[4,[3,6],[5,7]]],X).
-
-%Para consultar hacerlo de la siguiente manera
 %aplanar([1,2,[3,[4,5],[6,7]]],X).
-%
+
 
 
 %%%% Ejercicio 3 %%%%
@@ -43,6 +38,12 @@ distanciaHaming([H1|T1], [H2|T2], Acc, N) :-
     (H1 \= H2 -> N1 is Acc + 1; N1 is Acc),
     distanciaHaming(T1, T2, N1, N).
 
+/*Pruebas de ejercicio:*/
+%distanciaH("romano","comino",X).
+%distanciaH("romano","camino",X).
+%distanciaH("roma","comino",X).
+%distanciaH("romano","ron",X).
+%distanciaH("romano","cama",X).
 
 
 %%%% Ejercicio 4 %%%%
@@ -123,7 +124,7 @@ comida_completa_sin_repeticiones(ComidasAnteriores, MaxCalorias, ComidaCompleta)
 consultar_comidas(N, MaxCalorias, Combinaciones) :-
     findall(Combinacion, (between(1, N, _), comida_completa_sin_repeticiones([], MaxCalorias, Combinacion)), Combinaciones).
 
-%Pruebas:
+/*Pruebas de ejercicio:*/
 %consultar_comidas(5, 1000, Combinaciones).
 %sultar_comidas(5, 900, Combinaciones).
 
